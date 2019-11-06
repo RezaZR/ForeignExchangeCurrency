@@ -17,10 +17,12 @@ html {
 }
 body {
   width: 100%;
+  background-color: $white-smokey;
   margin: 0;
   padding: 0;
   font-family: $primary-font;
   line-height: 1.5;
+  letter-spacing: 0.05em;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   overflow-x: hidden;

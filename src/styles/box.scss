@@ -1,0 +1,64 @@
+.box {
+  width: 100%;
+  &--main {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: $primary-color;
+    color: $white;
+  }
+  &--secondary {
+    border-radius: 5px;
+    background-color: $white-smokey;
+    color: $black;
+  }
+  & input {
+    text-align: right;
+    background: transparent;
+    color: white;
+  }
+  ::placeholder {
+    font-size: $font-sm;
+    color: $white-075;
+  }
+  &__wrapper {
+    padding: 1em;
+    &--content {
+      padding: unset;
+      padding-top: 1em;
+      padding-bottom: 1em;
+      padding-left: 2em;
+    }
+  }
+  &__details {
+    font-style: italic;
+    font-weight: 400;
+    font-size: $font-sm;
+    letter-spacing: .1em;
+    &--bold {
+    font-weight: 700;
+    }
+    &--light {
+    font-weight: 300;
+    }
+  }
+  &__title {
+    font-size: $font-lg;
+    &--bold {
+    font-weight: 700;
+    }
+  }
+  &__delete {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background-color: $red;
+    line-height: 93.6px;
+    font-weight: 700;
+    cursor: pointer;
+    &:hover {
+      background-color: $red-hover;
+    }
+  }
+}
