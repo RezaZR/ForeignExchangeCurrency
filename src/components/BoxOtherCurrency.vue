@@ -7,18 +7,29 @@
             .d-flex.align-items-center
               .col-sm-6.no-padding
                 .d-flex.justify-content-start
-                  .box__title USD
+                  .box__title {{ data.code }}
               .col-sm-6.no-padding
                 .d-flex.justify-content-end
-                  .box__title.text-truncate(title="10.0000") 10.0000
-            .box__details.box__details--bold.text-truncate(title="USD - United State Dollars") USD - United State Dollars
-            .box__details.box__details--light.text-truncate(title="1 USD = IDR 14,410.45") 1 USD = IDR 14,410.45
+                  .box__title.text-truncate(:title="(data.rate * amount).toFixed(4)") {{ (data.rate * amount).toFixed(4) }}
+            .box__details.box__details--bold.text-truncate(v-bind:title="data.code + ` - ` + data.value") {{ data.code }} - {{ data.value }}
+            .box__details.box__details--light.text-truncate(:title="`1 USD = ` + data.code + ` ` + data.rate.toFixed(4)") 1 USD = {{ data.code }} {{ data.rate.toFixed(4) }}
         .col-sm-2
           button.box__delete(title="Click to delete") X
 </template>
 
 <script>
 export default {
-  name: "box_other_currency"
+  name: "box_other_currency",
+  props: {
+    data: {
+      required: true,
+      type: Object
+    }
+  },
+  computed: {
+    amount() {
+      return this.$store.state.currency.amount;
+    }
+  }
 };
 </script>

@@ -2,7 +2,7 @@
   div(v-if="contentFor === `main_currency`")
     BoxMainCurrency
   div(v-else-if="contentFor === `other_currency`")
-    BoxOtherCurrency
+    BoxOtherCurrency(:data="data")
 </template>
 
 <script>
@@ -13,8 +13,11 @@ export default {
   name: "box",
   props: {
     contentFor: {
-      type: String,
-      required: true
+      required: true,
+      type: String
+    },
+    data: {
+      type: Object
     }
   },
   components: {

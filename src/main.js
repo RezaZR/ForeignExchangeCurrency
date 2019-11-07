@@ -1,5 +1,10 @@
 import Vue from "vue";
 
+import axios from "axios";
+import VueAxios from "vue-axios";
+Vue.use(VueAxios, axios);
+Vue.axios.defaults.baseURL = "https://api.exchangeratesapi.io/";
+
 import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
