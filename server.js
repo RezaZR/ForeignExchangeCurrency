@@ -4,5 +4,3 @@ const app = express();
 
 app.use(express.static(__dirname + "/dist"));
 app.listen(port);
-
-console.log("Server is up!");
