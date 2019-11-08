@@ -11,6 +11,9 @@
     background-color: $white-smokey;
     color: $black;
     margin-bottom: .5em;
+    &--placeholder {
+      height: 93.6px;
+    }
   }
   & input {
     text-align: right;
@@ -47,11 +50,23 @@
     &--light {
     font-weight: 300;
     }
+    &--placeholder {
+      background-color: $white;
+      width: 50%;
+      height: 17.6px;
+      border-radius: 5px;
+    }
   }
   &__title {
     font-size: $font-lg;
     &--bold {
     font-weight: 700;
+    }
+    &--placeholder {
+      background-color: $white;
+      width: 50%;
+      height: 26.4px;
+      border-radius: 5px;
     }
   }
   &__delete {

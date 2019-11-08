@@ -2,31 +2,34 @@
   .home
     .container-sm
       .row
-        .col-md-12
+        .col-sm-12
           .home__wrapper
             Box(contentFor="main_currency")
             .home__wrapper__content
-              Box(contentFor="other_currency" :data="currency" :key="currency.id" v-for="currency in otherCurrencies")
+              Box(contentFor="other_currency" :data="otherCurrency" :key="otherCurrency.id" v-for="otherCurrency in otherCurrencies" v-if="!isLoading")
+              Box(contentFor="other_currency_placeholder" v-if="isLoading" v-for="currency in eligibleCurrencies.length")
               .home__wrapper__content__select(v-show="showSelect")
-                select
-                  option JPY
+                select(v-model="selected")
+                  option(:value="newCurrency.code" :key="newCurrency.id" v-for="newCurrency in newCurrencies") {{ newCurrency.value }}
                 button(@click="handleSubmit") Submit
               button.button(@click="handleClick" v-show="!showSelect") Add More Currencies
+          Alert(:type="type" :message="message" v-show="isActive")
 </template>
 
 <script>
 import Box from "@/components/Box";
-
-// import { currencyHelper } from "@/_helpers";
+import Alert from "@/components/Alert";
 
 export default {
   name: "home",
   components: {
-    Box
+    Box,
+    Alert
   },
   data() {
     return {
-      showSelect: false
+      showSelect: false,
+      selected: null
     };
   },
   mounted() {
@@ -36,20 +39,50 @@ export default {
     currencies() {
       return this.$store.state.currency.currencies;
     },
+    eligibleCurrencies() {
+      return this.$store.state.currency.eligibleCurrencies;
+    },
     otherCurrencies() {
       return this.$store.state.currency.otherCurrencies;
+    },
+    newCurrencies() {
+      return this.$store.state.currency.newCurrencies;
+    },
+    isLoading() {
+      return this.$store.state.currency.isLoading;
+    },
+    type() {
+      return this.$store.state.alert.type;
+    },
+    message() {
+      return this.$store.state.alert.message;
+    },
+    isActive() {
+      return this.$store.state.alert.isActive;
     }
   },
   methods: {
     explodeData() {
       this.$store.dispatch("getCurrencies", { base: "USD" });
-      this.$store.dispatch("getOtherCurrencies", { base: "USD" });
+      this.$store.dispatch("getOtherCurrencies", {
+        base: "USD",
+        isInitialData: true,
+        isOnDelete: false
+      });
     },
     handleClick() {
       this.showSelect = !this.showSelect;
     },
     handleSubmit() {
       this.handleClick();
+
+      this.$store.commit("setEligibleCurrencies", this.selected);
+      this.$store.dispatch("getOtherCurrencies", {
+        base: "USD",
+        isInitialData: false,
+        isOnDelete: false
+      });
+      this.$store.dispatch("getNewCurrencies");
     }
   }
 };

@@ -3,11 +3,14 @@
     BoxMainCurrency
   div(v-else-if="contentFor === `other_currency`")
     BoxOtherCurrency(:data="data")
+  div(v-else-if="contentFor === `other_currency_placeholder`")
+    BoxOtherCurrencyPlaceholder
 </template>
 
 <script>
 import BoxMainCurrency from "./BoxMainCurrency";
 import BoxOtherCurrency from "./BoxOtherCurrency";
+import BoxOtherCurrencyPlaceholder from "./BoxOtherCurrencyPlaceholder";
 
 export default {
   name: "box",
@@ -22,7 +25,8 @@ export default {
   },
   components: {
     BoxMainCurrency,
-    BoxOtherCurrency
+    BoxOtherCurrency,
+    BoxOtherCurrencyPlaceholder
   }
 };
 </script>

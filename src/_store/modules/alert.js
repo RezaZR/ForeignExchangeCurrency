@@ -2,25 +2,34 @@ export const alert = {
   namespaced: true,
   state: {
     type: "",
-    message: ""
+    message: "",
+    isActive: false
   },
   getters: {},
   actions: {
     success({ commit }, message) {
-      commit("success", message);
+      commit("setSuccess", message);
     },
     error({ commit }, message) {
-      commit("error", message);
+      commit("setError", message);
+    },
+    isActive({ commit }) {
+      commit("setIsActive");
     }
   },
   mutations: {
-    success(state, message) {
-      state.type = "alert-success";
+    setSuccess(state, message) {
+      state.type = "success";
       state.message = message;
+      state.isActive = true;
     },
-    error(state, message) {
-      state.type = "alert-danger";
+    setError(state, message) {
+      state.type = "error";
       state.message = message;
+      state.isActive = true;
+    },
+    setIsActive(state) {
+      state.isActive = false;
     }
   }
 };

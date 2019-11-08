@@ -20,7 +20,10 @@ export default {
         return this.$store.state.currency.amount;
       },
       set(newAmount) {
-        return this.$store.commit("setAmount", newAmount);
+        const parsedAmount = parseInt(newAmount);
+        if (typeof newAmount == "number" || !isNaN(parsedAmount)) {
+          return this.$store.commit("setAmount", newAmount);
+        }
       }
     }
   }

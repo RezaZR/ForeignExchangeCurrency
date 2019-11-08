@@ -14,7 +14,7 @@
             .box__details.box__details--bold.text-truncate(v-bind:title="data.code + ` - ` + data.value") {{ data.code }} - {{ data.value }}
             .box__details.box__details--light.text-truncate(:title="`1 USD = ` + data.code + ` ` + data.rate.toFixed(4)") 1 USD = {{ data.code }} {{ data.rate.toFixed(4) }}
         .col-sm-2
-          button.box__delete(title="Click to delete") X
+          button.box__delete(@click="handleDelete" title="Click to delete") X
 </template>
 
 <script>
@@ -29,6 +29,20 @@ export default {
   computed: {
     amount() {
       return this.$store.state.currency.amount;
+    },
+    eligibleCurrencies() {
+      return this.$store.state.currency.eligibleCurrencies;
+    }
+  },
+  methods: {
+    handleDelete() {
+      this.$store.dispatch("removeEligibleCurrencies", this.data.code);
+      this.$store.dispatch("getOtherCurrencies", {
+        base: "USD",
+        isInitialData: false,
+        isOnDelete: true
+      });
+      this.$store.dispatch("getNewCurrencies");
     }
   }
 };

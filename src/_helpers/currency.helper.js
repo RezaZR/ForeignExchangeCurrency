@@ -1,7 +1,7 @@
 export const currencyHelper = {
-  setCurrencyName(key, value) {
+  setCurrencyName(code, rate) {
     let currencyObject = new Object();
-    switch (key) {
+    switch (code) {
       case "USD":
         currencyObject.value = "United States Dollar";
         break;
@@ -104,8 +104,8 @@ export const currencyHelper = {
       default:
         break;
     }
-    currencyObject.code = key;
-    currencyObject.rate = value;
+    currencyObject.code = code;
+    currencyObject.rate = rate;
     return currencyObject;
   }
 };
